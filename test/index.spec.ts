@@ -10,22 +10,24 @@ const mockUpdateRecord = vi.fn();
 
 vi.mock('cloudflare', () => {
 	return {
-		Cloudflare: vi.fn().mockImplementation(() => ({
-			user: {
-				tokens: {
-					verify: mockVerify,
+		Cloudflare: vi.fn().mockImplementation(function () {
+			return {
+				user: {
+					tokens: {
+						verify: mockVerify,
+					},
 				},
-			},
-			zones: {
-				list: mockListZones,
-			},
-			dns: {
-				records: {
-					list: mockListRecords,
-					update: mockUpdateRecord,
+				zones: {
+					list: mockListZones,
 				},
-			},
-		})),
+				dns: {
+					records: {
+						list: mockListRecords,
+						update: mockUpdateRecord,
+					},
+				},
+			};
+		}),
 	};
 });
 
